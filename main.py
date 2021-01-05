@@ -60,4 +60,4 @@ async def on_message_delete(message):
     return Events.message_delete(message)
 
 # Discord connection
-bot.run(getenv("TOKEN"), reconnect = True)
+bot.run(getenv("BOT_TOKEN"), reconnect = True)

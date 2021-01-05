@@ -40,7 +40,7 @@ class Database(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def db(self, ctx, database = None, key = None, value = None):
+    async def db(self, ctx, database = None, key = None, *, value = None):
 
         # Check for database
         if database is None:
@@ -99,25 +99,15 @@ class Database(commands.Cog):
 
             # Convert value
             try:
-                value = int(value)
+                value = json.loads(value)
 
-            except ValueError:
+            except json.JSONDecodeError:
 
                 try:
-                    value = float(value)
+                    value = json.loads(f"\"{value}\"")
 
-                except ValueError:
-
-                    try:
-                        value = bool(value)
-
-                    except ValueError:
-
-                        try:
-                            value = dict(value)
-
-                        except ValueError:
-                            pass
+                except json.JSONDecodeError:
+                    return await ctx.send(embed = Tools.error("Invalid JSON value provided!"))
 
             self.set_db_value(db, key_struct, value)
 
