@@ -418,7 +418,8 @@ class Tools:
       "with TDmot.",
       "with Bob.",
       "Astroneer.",
-      "Among Us."
+      "Among Us.",
+      "Don't Starve."
     ]
 
     activity = choice(["watching", "playing"])
